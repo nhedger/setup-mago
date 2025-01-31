@@ -1,0 +1,39 @@
+{
+	"name": "setup-mago",
+	"description": "Setup the Mago CLI in GitHub Actions",
+	"module": "src/index.ts",
+	"type": "module",
+	"scripts": {
+		"tag": "bun run scripts/tag-github-action.ts",
+		"build": "bun build . --outfile dist/index.mjs --target node --minify",
+		"check": "biome check --write",
+		"typecheck": "tsc --noEmit",
+		"ci": "biome ci"
+	},
+	"keywords": ["mago", "php", "cli", "github-action"],
+	"author": {
+		"name": "Nicolas Hedger",
+		"email": "nicolas@hedger.ch"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"@actions/core": "1.11.1",
+		"@actions/tool-cache": "2.0.2",
+		"@octokit/auth-action": "5.1.1",
+		"@octokit/request-error": "6.1.6",
+		"@octokit/rest": "21.1.0",
+		"semver": "7.6.3",
+		"ts-dedent": "2.2.0",
+		"yaml": "2.7.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@octokit/types": "13.7.0",
+		"@types/bun": "1.2.0",
+		"@types/semver": "7.5.8",
+		"lefthook": "1.10.10",
+		"typescript": "5.7.3"
+	},
+	"packageManager": "bun@1.1.4",
+	"trustedDependencies": ["@biomejs/biome", "lefthook"]
+}

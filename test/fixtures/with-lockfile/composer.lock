@@ -1,0 +1,72 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "1c13686663dd86848ac4a253b323e158",
+    "packages": [],
+    "packages-dev": [
+        {
+            "name": "carthage-software/mago",
+            "version": "0.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/carthage-software/mago.git",
+                "reference": "9b59274a619c7ff1b7e77e6b525c22bf8a632ed9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/carthage-software/mago/zipball/9b59274a619c7ff1b7e77e6b525c22bf8a632ed9",
+                "reference": "9b59274a619c7ff1b7e77e6b525c22bf8a632ed9",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.6",
+                "php": "~8.1 || ~8.2 || ~8.3 || ~8.4"
+            },
+            "require-dev": {
+                "composer/composer": "^2.8"
+            },
+            "bin": [
+                "composer/bin/mago"
+            ],
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Mago\\MagoPlugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mago\\": "composer/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT OR Apache-2.0"
+            ],
+            "description": "Mago is a toolchain for PHP that aims to provide a set of tools to help developers write better code.",
+            "keywords": [
+                "dev"
+            ],
+            "support": {
+                "issues": "https://github.com/carthage-software/mago/issues",
+                "source": "https://github.com/carthage-software/mago/tree/0.6.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/azjezz",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-01-29T23:37:08+00:00"
+        }
+    ],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
+}

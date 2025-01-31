@@ -1,0 +1,44 @@
+name: Integrate
+
+on:
+  push:
+    branches: [main, "releases/v*"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: ".bun-version"
+
+      - name: Install dependencies
+        run: bun install --ignore-scripts
+
+      - name: Build action
+        run: |
+          bun --bun typecheck
+          bun run build
+
+  coding-standards:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: ".bun-version"
+
+      - name: Install dependencies
+        run: bun i
+
+      - name: Run Biome
+        run: bun biome ci .

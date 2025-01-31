@@ -1,0 +1,90 @@
+name: Test
+
+on:
+  push:
+    branches: [main, "releases/v*"]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  # This version is used when running the tests to ensure that the correct version is installed.
+  # It is the version that the test expect to find during automatic version detection. It is important
+  # that this version is NOT the latest version of the CLI because some tests may still pass if the
+  # automatic version detection fails and falls back to the latest version.
+  EXPECTED_VERSION: 0.6.2
+
+jobs:
+  test-specific:
+    name: Specific version
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Setup Mago
+        uses: ./
+        with:
+          version: "0.6.2"
+      - name: Retrieve the version
+        id: version
+        shell: bash
+        run: echo "version=$(mago --version)" >> "$GITHUB_OUTPUT"
+      - name: Check equality
+        shell: bash
+        run: |
+          if [ "mago 0.6.2" == "${{ steps.version.outputs.version }}" ]; then
+            exit 0
+          else
+            echo "Versions do not match"
+            exit 1
+          fi
+
+  test-composer-lock:
+    name: Auto-detect version (composer.lock)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Setup Mago
+        uses: ./
+        with:
+          working-directory: "test/fixtures/with-lockfile"
+      - name: Retrieve the version
+        id: version
+        shell: bash
+        run: echo "version=$(mago --version)" >> "$GITHUB_OUTPUT"
+      - name: Check equality
+        shell: bash
+        run: |
+          if [ "mago ${{ env.EXPECTED_VERSION }}" == "${{ steps.version.outputs.version }}" ]; then
+            exit 0
+          else
+            echo "Versions do not match"
+            exit 1
+          fi
+          
+  test-fallback-latest:
+    name: Fallback to latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Setup Mago
+        uses: ./
+        with:
+          working-directory: "test/fixtures/fallback"
+      - name: Retrieve the version
+        id: version
+        shell: bash
+        run: mago --version
