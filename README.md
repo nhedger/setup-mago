@@ -49,7 +49,7 @@ be found in the lockfile, the action will install the latest version of the Mago
   uses: nhedger/setup-mago@v1
 
 - name: Run Mago
-  run: mago lint
+  run: mago lint --reporting-format=github
 ```
 
 ### Latest version
@@ -63,7 +63,7 @@ Setup the latest version of the Mago CLI.
     version: latest
 
 - name: Run Mago
-  run: mago lint
+  run: mago lint --reporting-format=github
 ```
 
 ### Specific version
@@ -77,7 +77,7 @@ Install version `0.7.0` of the Mago CLI.
     version: 0.7.0
 
 - name: Run Mago
-  run: mago lint
+  run: mago lint --reporting-format=github
 ```
 
 ## License
