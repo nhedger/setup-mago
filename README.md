@@ -58,7 +58,7 @@ Setup the latest version of the Mago CLI.
 
 ```yaml
 - name: Setup Mago CLI
-  uses: nhedger/setup-mago@v2
+  uses: nhedger/setup-mago@v1
   with:
     version: latest
 
