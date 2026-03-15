@@ -4,7 +4,7 @@ import { addPath, setFailed } from "@actions/core";
 import { downloadTool, extractTar, extractZip } from "@actions/tool-cache";
 import { RequestError } from "@octokit/request-error";
 import { Octokit } from "@octokit/rest";
-import { type SemVer, coerce, rsort } from "semver";
+import { coerce, rsort, type SemVer } from "semver";
 
 /**
  * Mago Setup Options
