@@ -111,7 +111,7 @@ const findRelease = async (
 				throw new Error(`
 					Could not determine the latest Mago release. The GitHub API did not 
 					return any published releases, and may be encountering some issues.
-				`);                                                                                                                                                                                                                                             
+				`);
 			}
 
 			versionToDownload = sortedVersions[0].version;
